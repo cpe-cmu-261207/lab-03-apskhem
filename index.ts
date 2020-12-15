@@ -4,9 +4,9 @@
  * @param {number} b the second number
  * @returns {number} the sum of a and b
  */
-export const sum = (a, b) => {
+export const sum = (a: number, b: number): number => {
   // TODO: implement here
-
+  return a + b;
 }
 
 /**
@@ -18,9 +18,15 @@ export const sum = (a, b) => {
  * @returns {any[]} an array whose elements are the results of applying the
  *    callback function to the elements in the original array
  */
-export const map = (arr, callback) => {
+export const map = <T, U>(arr: T[], callback: (item: T, index: number) => U): U[] => {
   // TODO: implement here
+  const res = [];
 
+  for (let i = 0; i < arr.length; i++) {
+    res.push(callback(arr[i], i));
+  }
+
+  return res;
 }
 
 /**
@@ -31,9 +37,16 @@ export const map = (arr, callback) => {
  * @returns {any[]} an array whose elements are from the original array, that
  *    makes the callback predicate true
  */
-export const filter = (arr, callback) => {
+export const filter = <T>(arr: T[], callback: (item: any, index: number) => boolean): T[] => {
   // TODO: implement here
+  const res = [];
 
+  for (let i = 0; i < arr.length; i++) {
+    const temp = callback(arr[i], i);
+    if (temp) res.push(arr[i]);
+  }
+
+  return res;
 }
 
 /**
@@ -51,7 +64,13 @@ export const filter = (arr, callback) => {
  * @returns {any} the final value of the result after processing every element
  *    in the array
  */
-export const reduce = (arr, callback, initialValue) => {
+export const reduce = <T, U>(arr: T[], callback: (prev: U, item: T, index: number) => U, initialValue: U): U => {
   // TODO: implement here
+  let res = initialValue;
 
+  for (let i = 0; i < arr.length; i++) {
+    res = callback(res, arr[i], i);
+  }
+
+  return res;
 }
